@@ -1,9 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { Form, Input } from '@rocketseat/unform';
+import { toast } from 'react-toastify';
 import * as yup from 'yup';
 
+import { useDispatch } from 'react-redux';
 import logo from '~/assets/logo.svg';
+import { signFailure, signUpRequest } from '~/store/modules/auth/actions';
+import api from '~/services/api';
 
 const schema = yup.object().shape({
   email: yup
@@ -18,7 +22,24 @@ const schema = yup.object().shape({
 });
 
 function SignUp() {
-  function handleSubmit(data) {}
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  async function handleSubmit({ name, email, password }) {
+    try {
+      await api.post('/users', {
+        name,
+        email,
+        password,
+      });
+      toast.success('Usuário cadastrado com sucesso');
+      history.push('/');
+    } catch (err) {
+      toast.error('Falha ao cadastrar usuário');
+      // dispatch(signUpRequest(name, email, password));
+      dispatch(signFailure());
+    }
+  }
   return (
     <>
       <img src={logo} alt="GoBarber" />
