@@ -6,7 +6,7 @@ import * as yup from 'yup';
 
 import { useDispatch } from 'react-redux';
 import logo from '~/assets/logo.svg';
-import { signFailure, signUpRequest } from '~/store/modules/auth/actions';
+import { signFailure } from '~/store/modules/auth/actions';
 import api from '~/services/api';
 
 const schema = yup.object().shape({

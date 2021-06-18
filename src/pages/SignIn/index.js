@@ -34,6 +34,7 @@ function SignIn() {
         toast.error('Usuario não é prestador de serviço');
         return;
       }
+      api.defaults.headers.Authorization = `Bearer ${token}`;
       dispatch(signInSuccess(token, user));
       history.push('/dashboard');
     } catch (err) {
