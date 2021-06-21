@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.21.1",
     "date-fns": "^2.0.0-beta.5",
+    "date-fns-tz": "^1.1.4",
     "history": "^5.0.0",
     "immer": "^9.0.2",
     "polished": "^4.1.3",
