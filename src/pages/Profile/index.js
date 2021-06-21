@@ -1,7 +1,9 @@
 import React from 'react';
 import { Form, Input } from '@rocketseat/unform';
 import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { updateProfileRequest } from '~/store/modules/user/actions';
+import { signOut } from '~/store/modules/auth/actions';
 
 import AvatarInput from './AvatarInput';
 
@@ -10,9 +12,15 @@ import { Container } from './styles';
 function Profile() {
   const profile = useSelector((state) => state.user.profile);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   function handleSubmit(data) {
     dispatch(updateProfileRequest(data));
+  }
+
+  function handleSignOut() {
+    dispatch(signOut());
+    history.push('/');
   }
   return (
     <Container>
@@ -38,7 +46,9 @@ function Profile() {
         <button type="submit">Atualizar perfil</button>
       </Form>
 
-      <button type="button">Sair do GoBarber</button>
+      <button type="button" onClick={handleSignOut}>
+        Sair do GoBarber
+      </button>
     </Container>
   );
 }
